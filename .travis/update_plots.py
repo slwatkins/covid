@@ -24,4 +24,4 @@ ax.set_title(
     f"Source: JHU, Last Updated: {datetime.date.today().strftime(format='%Y-%m-%d')}"
 )
 fig = plt.gcf()
-fig.savefig("current_alameda_cases.png", dpi=200)
+fig.savefig(".travis/current_alameda_cases.png", dpi=200)

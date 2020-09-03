@@ -16,7 +16,7 @@ ax.set_title(
     "Bay Area COVID-19 Stats\n"
     f"Source: JHU, Last Updated: {datetime.date.today().strftime(format='%Y-%m-%d')}"
 )
-fig.savefig(".travis/current_bay_area_total_cases.png", dpi=200)
+fig.savefig(".travis/current_bay_area_total_cases.png", dpi=200, bbox_inches='tight')
 
 fig, ax = covid.plot_bay_cases(
     cumulative=False,
@@ -30,7 +30,7 @@ ax.set_title(
     "Bay Area COVID-19 Stats\n"
     f"Source: JHU, Last Updated: {datetime.date.today().strftime(format='%Y-%m-%d')}"
 )
-fig.savefig(".travis/current_bay_area_new_cases.png", dpi=200)
+fig.savefig(".travis/current_bay_area_new_cases.png", dpi=200, bbox_inches='tight')
 
 
 fig, ax = covid.plot_bay_cases(
@@ -41,7 +41,7 @@ fig, ax = covid.plot_bay_cases(
     lastnumdays=None,
     data_source='jhu',
 )
-fig.savefig(".travis/current_county_total_cases.png", dpi=200)
+fig.savefig(".travis/current_county_total_cases.png", dpi=200, bbox_inches='tight')
 
 fig, ax = covid.plot_bay_cases(
     cumulative=False,
@@ -51,7 +51,7 @@ fig, ax = covid.plot_bay_cases(
     lastnumdays=None,
     data_source='jhu',
 )
-fig.savefig(".travis/current_county_new_cases.png", dpi=200)
+fig.savefig(".travis/current_county_new_cases.png", dpi=200, bbox_inches='tight')
 
 fig, ax = covid.plot_bay_cases(
     cumulative=False,
@@ -61,4 +61,4 @@ fig, ax = covid.plot_bay_cases(
     lastnumdays=31,
     data_source='jhu',
 )
-fig.savefig(".travis/current_county_new_cases_month.png", dpi=200)
+fig.savefig(".travis/current_county_new_cases_month.png", dpi=200, bbox_inches='tight')

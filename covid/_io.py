@@ -1,13 +1,25 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+from scipy import signal
 import os
 
 __all__ = [
     'get_data',
+    'get_bay_data',
 ]
 
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
+BAYAREA_COUNTIES = [
+    'Alameda',
+    'Contra Costa',
+    'Marin',
+    'Napa',
+    'San Francisco',
+    'San Mateo',
+    'Santa Clara',
+    'Solano',
+    'Sonoma',
+]
 
 def _read_jhu_csv(path, datatype, us_or_global):
     """
@@ -177,3 +189,20 @@ def get_data(data_source='jhu'):
         return _get_nytimes_data()
 
     raise ValueError("data_source should be either 'jhu' or 'nytimes'.")
+
+
+def get_bay_data(data_source='jhu'):
+    df = get_data(data_source=data_source)
+
+    bayarea_cut = np.logical_or.reduce([df.county == bac for bac in BAYAREA_COUNTIES])
+    bay_df = df[bayarea_cut].groupby('date').sum()
+    bay_df.drop(['fips'], axis='columns', inplace=True)
+    if data_source=='jhu':
+        bay_df.drop(['lat', 'long'], axis='columns', inplace=True)
+
+    bay_df['new_cases'] = np.concatenate(([0], np.diff(bay_df.cases)))
+    bay_df['new_deaths'] = np.concatenate(([0], np.diff(bay_df.deaths)))
+    bay_df['new_cases_filt'] = signal.savgol_filter(bay_df.new_cases, 15, 3)
+    bay_df['new_deaths_filt'] = signal.savgol_filter(bay_df.new_deaths, 15, 3)
+
+    return bay_df

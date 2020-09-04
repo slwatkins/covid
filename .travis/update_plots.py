@@ -51,6 +51,7 @@ fig, ax = covid.plot_bay_cases(
     lastnumdays=None,
     data_source='jhu',
 )
+ax[0, 0].set_ylim(0, 500)
 fig.savefig(".travis/current_county_new_cases.png", dpi=200, bbox_inches='tight')
 
 fig, ax = covid.plot_bay_cases(
@@ -61,4 +62,5 @@ fig, ax = covid.plot_bay_cases(
     lastnumdays=31,
     data_source='jhu',
 )
+ax[0, 0].set_ylim(0, 500)
 fig.savefig(".travis/current_county_new_cases_month.png", dpi=200, bbox_inches='tight')

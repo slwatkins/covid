@@ -5,7 +5,7 @@ To install this package, clone this repo, from the top-level directory of the re
 
 `pip install .`
 
-The plots below are easily reproducible using the `covid.plot_bay_cases` method. There are also useful functions for reading in the COVID-19 data from both the JHU and [NY Times](https://github.com/nytimes/covid-19-data) datasets: `covid.get_data` loads the entire COVID-19 dataset from the specified source into a `Pandas.DataFrame`, and `covid.bay_data` loads the pertinent information for only the 9 Bay Area counties.
+The plots below are easily reproducible using the `covid.plot_bay_cases` method. There are also useful functions for reading in the COVID-19 data from both the JHU and [NY Times](https://github.com/nytimes/covid-19-data) datasets: `covid.get_data` loads the entire COVID-19 dataset from the specified source into a `Pandas.DataFrame`, and `covid.get_bay_data` loads the pertinent information for only the 9 Bay Area counties.
 
 The Bay Area counties included are: Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, Solano, and Sonoma.
 

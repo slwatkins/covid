@@ -8,9 +8,6 @@ from numpy.distutils.core import Extension, setup
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-with open(".travis/build_number.txt", "r") as fh:
-    build_no = fh.read()
-
 covid_data_paths_jhu = [
     "covid/data/jhu/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv",
     "covid/data/jhu/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv",
@@ -50,7 +47,7 @@ class CleanCommand(Command):
 
 setup(
     name="covid",
-    version=f"0.1.{int(build_no)}",
+    version="0.1.1",
     description="Bay Area COVID-19 Plotting Package",
     author="Samuel Watkins",
     author_email="samwatkins@berkeley.edu",

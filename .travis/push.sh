@@ -5,8 +5,6 @@ setup_git() {
 }
 
 commit_files() {
-  echo $TRAVIS_BUILD_NUMBER > .travis/build_number.txt
-  git add .travis/build_number.txt
   git add .travis/*.png
   git commit --message "Update plots. Travis build: $TRAVIS_BUILD_NUMBER"
 }

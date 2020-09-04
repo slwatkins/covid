@@ -13,6 +13,11 @@ __all__ = [
 
 
 def _plot_cumulative_bay_cases(cases, deaths, lastnumdays, data_source):
+    """
+    Hidden function for plotting the cumulative cases and/or deaths for
+    the total Bay Area.
+
+    """
 
     bay_df = get_bay_data(data_source=data_source)
 
@@ -51,6 +56,11 @@ def _plot_cumulative_bay_cases(cases, deaths, lastnumdays, data_source):
     return fig, ax
 
 def _plot_new_bay_cases(cases, deaths, lastnumdays, data_source):
+    """
+    Hidden function for plotting the new daily cases and/or deaths for
+    the total Bay Area.
+
+    """
 
     bay_df = get_bay_data(data_source=data_source)
 
@@ -95,6 +105,12 @@ def _plot_new_bay_cases(cases, deaths, lastnumdays, data_source):
     return fig, ax
 
 def _plot_cumulative_county_cases(cases, deaths, lastnumdays, data_source):
+    """
+    Hidden function for plotting the cumulative cases and/or deaths for
+    the each county in the Bay Area.
+
+    """
+
     df = get_data(data_source=data_source)
 
     fig, ax = plt.subplots(3, 3, sharey=True, sharex=True)
@@ -128,6 +144,12 @@ def _plot_cumulative_county_cases(cases, deaths, lastnumdays, data_source):
     return fig, ax
 
 def _plot_new_county_cases(cases, deaths, lastnumdays, data_source):
+    """
+    Hidden function for plotting the daily new cases and/or deaths for
+    the each county in the Bay Area.
+
+    """
+
     df = get_data(data_source=data_source)
 
     fig, ax = plt.subplots(3, 3, sharey=True, sharex=True)
@@ -168,6 +190,42 @@ def _plot_new_county_cases(cases, deaths, lastnumdays, data_source):
     return fig, ax
 
 def plot_bay_cases(cumulative=True, cases=True, deaths=False, groupcounties=True, lastnumdays=None, data_source='jhu'):
+    """
+    Function for plotting various pertinent plots for COVID-19
+    cases/deaths in the San Francisco Bay Area.
+
+    Parameters
+    ----------
+    cumulative : bool, optional
+        Boolean value for plotting the cumulative cases/deaths (True)
+        or the daily new cases/deaths (False). Default is True.
+    cases : bool, optional
+        Boolean value for whether or not to plot the confirmed cases
+        data. Default is True.
+    deaths : bool, optional
+        Boolean value for whether or not to plot the confirmed deaths
+        data. Default is False.
+    groupcounties : bool, optional
+        Boolean value for grouping all Bay Area counties into one plot
+        (True) or plotting each county individually in a grid of
+        subplots (False). Default is True.
+    lastnumdays : int, NoneType, optional
+        Option to plot only the specified last number of days. If set
+        to None, then the full date range is plotted.
+    data_source : str, optional
+        The source to use for the COVID-19 data. Can be either "jhu"
+        for the John Hopkins University dataset or "nytimes" for the NY
+        Times dataset.
+
+    Returns
+    -------
+    fig : matplotlib.Figure
+        The figure object for the created plot.
+    ax : matplotlib.Axes, list of matplotlib.Axes
+        The Axes object (or a list of Axes objects) for the created
+        plot.
+
+    """
 
     if cumulative and groupcounties:
         fig, ax = _plot_cumulative_bay_cases(cases, deaths, lastnumdays, data_source)

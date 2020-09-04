@@ -100,7 +100,11 @@ def _read_jhu_csv(path, datatype, us_or_global):
     return jhu_csv
 
 def _merge_jhu_data(us_or_global):
-    """Function for merging the JHU data to combine different source files."""
+    """
+    Function for merging the JHU data to combine different source
+    files.
+
+    """
 
     if us_or_global == "us":
         jhu_paths = [
@@ -140,7 +144,10 @@ def _merge_jhu_data(us_or_global):
     return jhu_data
 
 def _get_jhu_data():
-    """Function for reading all JHU data and returning a Pandas DataFrame."""
+    """
+    Function for reading all JHU data and returning a Pandas DataFrame.
+
+    """
 
     jhu_data = pd.concat(
         (_merge_jhu_data('us'), _merge_jhu_data('global')), ignore_index=True, sort=False,
@@ -149,7 +156,11 @@ def _get_jhu_data():
     return jhu_data
 
 def _get_nytimes_data():
-    """Function for reading the NYTimes data and returning a Pandas DataFrame."""
+    """
+    Function for reading the NYTimes data and returning a Pandas
+    DataFrame.
+
+    """
 
     nytimes_data = pd.read_csv(f"{FILE_PATH}/data/nytimes/us-counties.csv")
     nytimes_data['date'] = pd.to_datetime(nytimes_data['date'])
@@ -192,6 +203,38 @@ def get_data(data_source='jhu'):
 
 
 def get_bay_data(data_source='jhu'):
+    """
+    Function for parsing and returning a dataset on COVID-19 for the
+    entire San Francisco Bay Area. See Notes for the included counties.
+
+    Parameters
+    ----------
+    data_source : str, optional
+        The source to use for the COVID-19 data. Can be either "jhu"
+        for the John Hopkins University dataset or "nytimes" for the NY
+        Times dataset. See Notes for more information on these
+        datasets.
+
+    Returns
+    -------
+    bay_df : Pandas.DataFrame
+        A DataFrame containing all the relevant information from the
+        specified `data_source` on COVID-19 for the total Bay Area.
+
+    Notes
+    -----
+    The Bay Area counties included are:
+        Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo,
+        Santa Clara, Solano, and Sonoma.
+
+    The John Hopkins University dataset can be found here:
+        - https://github.com/CSSEGISandData/COVID-19
+
+    The NY Times dataset can be found here:
+        - https://github.com/nytimes/covid-19-data
+
+    """
+
     df = get_data(data_source=data_source)
 
     bayarea_cut = np.logical_or.reduce([df.county == bac for bac in BAYAREA_COUNTIES])

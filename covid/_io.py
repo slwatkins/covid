@@ -262,8 +262,6 @@ def get_bay_data(data_source='jhu'):
     )
     bay_df = df[bayarea_cut].groupby('date').sum()
     bay_df.drop(['fips'], axis='columns', inplace=True)
-    if data_source=='jhu':
-        bay_df.drop(['lat', 'long'], axis='columns', inplace=True)
 
     bay_df['new_cases'] = np.concatenate(([0], np.diff(bay_df.cases)))
     bay_df['new_deaths'] = np.concatenate(([0], np.diff(bay_df.deaths)))

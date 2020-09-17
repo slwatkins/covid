@@ -32,7 +32,9 @@ def _read_jhu_csv(path, datatype, us_or_global):
 
     if us_or_global == "us":
 
-        jhu_us_remove_columns = ['UID', 'iso2', 'iso3', 'code3', 'Combined_Key']
+        jhu_us_remove_columns = [
+            'UID', 'iso2', 'iso3', 'code3', 'Combined_Key', "Lat", "Long_",
+        ]
         if 'Population' in jhu_csv.keys():
             jhu_us_remove_columns.append('Population')
         jhu_csv.drop(columns=jhu_us_remove_columns, inplace=True)
@@ -42,8 +44,6 @@ def _read_jhu_csv(path, datatype, us_or_global):
             "Admin2": "county",
             "Province_State": "state",
             "Country_Region": "country",
-            "Lat": "lat",
-            "Long_": "long",
         }
 
         jhu_csv.rename(columns=jhu_us_rename_columns, inplace=True)
@@ -55,23 +55,27 @@ def _read_jhu_csv(path, datatype, us_or_global):
 
         jhu_csv.rename(columns=timestamp, inplace=True)
 
-        jhu_us_keep_columns = ['fips', 'county', 'state', 'country', 'lat', 'long']
+        jhu_us_keep_columns = ['fips', 'county', 'state', 'country']
 
         if datatype == 'confirmed':
             jhu_csv = pd.melt(
-                jhu_csv, id_vars=jhu_us_keep_columns, var_name='date', value_name='cases',
+                jhu_csv,
+                id_vars=jhu_us_keep_columns,
+                var_name='date',
+                value_name='cases',
             )
         elif datatype == 'deaths':
             jhu_csv = pd.melt(
-                jhu_csv, id_vars=jhu_us_keep_columns, var_name='date', value_name='deaths',
+                jhu_csv,
+                id_vars=jhu_us_keep_columns,
+                var_name='date',
+                value_name='deaths',
             )
 
     elif us_or_global == 'global':
         jhu_global_rename_columns = {
             "Province/State": "state",
             "Country/Region": "country",
-            "Lat": "lat",
-            "Long": "long",
         }
 
         jhu_csv.rename(columns=jhu_global_rename_columns, inplace=True)
@@ -83,18 +87,27 @@ def _read_jhu_csv(path, datatype, us_or_global):
         }
 
         jhu_csv.rename(columns=timestamp, inplace=True)
-        jhu_global_keep_columns = ['state', 'country', 'lat', 'long']
+        jhu_global_keep_columns = ['state', 'country']
         if datatype == 'confirmed':
             jhu_csv = pd.melt(
-                jhu_csv, id_vars=jhu_global_keep_columns, var_name='date', value_name='cases',
+                jhu_csv,
+                id_vars=jhu_global_keep_columns,
+                var_name='date',
+                value_name='cases',
             )
         elif datatype == 'deaths':
             jhu_csv = pd.melt(
-                jhu_csv, id_vars=jhu_global_keep_columns, var_name='date', value_name='deaths',
+                jhu_csv,
+                id_vars=jhu_global_keep_columns,
+                var_name='date',
+                value_name='deaths',
             )
         elif datatype == 'recovered':
             jhu_csv = pd.melt(
-                jhu_csv, id_vars=jhu_global_keep_columns, var_name='date', value_name='recovered',
+                jhu_csv,
+                id_vars=jhu_global_keep_columns,
+                var_name='date',
+                value_name='recovered',
             )
 
     return jhu_csv
@@ -112,7 +125,9 @@ def _merge_jhu_data(us_or_global):
             f"{FILE_PATH}/data/jhu/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv",
         ]
 
-        jhu_datainfo = [p.lower().split('.')[-2].split('_')[-2:] for p in jhu_paths]
+        jhu_datainfo = [
+            p.lower().split('.')[-2].split('_')[-2:] for p in jhu_paths
+        ]
 
         jhu_data = pd.merge(
             *[_read_jhu_csv(
@@ -130,7 +145,9 @@ def _merge_jhu_data(us_or_global):
             f"{FILE_PATH}/data/jhu/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv",
         ]
 
-        jhu_datainfo = [p.lower().split('.')[-2].split('_')[-2:] for p in jhu_paths]
+        jhu_datainfo = [
+            p.lower().split('.')[-2].split('_')[-2:] for p in jhu_paths
+        ]
 
         for ii in range(len(jhu_paths)):
             if ii == 0:
@@ -150,7 +167,9 @@ def _get_jhu_data():
     """
 
     jhu_data = pd.concat(
-        (_merge_jhu_data('us'), _merge_jhu_data('global')), ignore_index=True, sort=False,
+        (_merge_jhu_data('us'), _merge_jhu_data('global')),
+        ignore_index=True,
+        sort=False,
     )
 
     return jhu_data
@@ -174,15 +193,16 @@ def get_data(data_source='jhu'):
     Parameters
     ----------
     data_source : str, optional
-        The source to use for the COVID-19 data. Can be either "jhu" for the
-        John Hopkins University dataset or "nytimes" for the NY Times dataset.
-        See Notes for more information on these datasets.
+        The source to use for the COVID-19 data. Can be either "jhu"
+        for the John Hopkins University dataset or "nytimes" for the
+        NY Times dataset. See Notes for more information on these
+        datasets.
 
     Returns
     -------
     df_data : Pandas.DataFrame
-        A DataFrame containing all the relevant information from the specified
-        `data_source` on COVID-19.
+        A DataFrame containing all the relevant information from the
+        specified `data_source` on COVID-19.
 
     Notes
     -----
@@ -237,7 +257,9 @@ def get_bay_data(data_source='jhu'):
 
     df = get_data(data_source=data_source)
 
-    bayarea_cut = np.logical_or.reduce([df.county == bac for bac in BAYAREA_COUNTIES])
+    bayarea_cut = np.logical_or.reduce(
+        [df.county == bac for bac in BAYAREA_COUNTIES]
+    )
     bay_df = df[bayarea_cut].groupby('date').sum()
     bay_df.drop(['fips'], axis='columns', inplace=True)
     if data_source=='jhu':

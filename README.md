@@ -27,10 +27,10 @@ Below, we show the total, cumulative cases (and deaths) over time for each of th
 
 ![County Cumulative](.travis/current_county_total_cases.png)
 
-Below, we show the daily new cases cases over time for each of the 9 Bay Area counties.
+Below, we show the daily new cases over time for each of the 9 Bay Area counties.
 
 ![County Daily](.travis/current_county_new_cases.png)
 
-Below, we show the daily new cases cases over the last month for each of the 9 Bay Area counties.
+Below, we show the daily new cases over the last month for each of the 9 Bay Area counties.
 
 ![County Daily, Recent](.travis/current_county_new_cases_month.png)

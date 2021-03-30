@@ -14,22 +14,22 @@ The Bay Area counties included are: Alameda, Contra Costa, Marin, Napa, San Fran
 
 Below, we show the total, cumulative cases (and deaths) over time for the combined 9 Bay Area counties.
 
-![Bay Area Cumulative](https://github.com/slwatkins/covid/blob/master/.travis/current_bay_area_total_cases.png)
+![Bay Area Cumulative](https://github.com/slwatkins/covid/blob/master/.github/current_bay_area_total_cases.png)
 
 Below, we show the daily new cases (and deaths) over time for the combined 9 Bay Area counties.
 
-![Bay Area Daily](https://github.com/slwatkins/covid/blob/master/.travis/current_bay_area_new_cases.png)
+![Bay Area Daily](https://github.com/slwatkins/covid/blob/master/.github/current_bay_area_new_cases.png)
 
 ## County-by-County Numbers
 
 Below, we show the total, cumulative cases (and deaths) over time for each of the 9 Bay Area counties.
 
-![County Cumulative](https://github.com/slwatkins/covid/blob/master/.travis/current_county_total_cases.png)
+![County Cumulative](https://github.com/slwatkins/covid/blob/master/.github/current_county_total_cases.png)
 
 Below, we show the daily new cases over time for each of the 9 Bay Area counties.
 
-![County Daily](https://github.com/slwatkins/covid/blob/master/.travis/current_county_new_cases.png)
+![County Daily](https://github.com/slwatkins/covid/blob/master/.github/current_county_new_cases.png)
 
 Below, we show the daily new cases over the last month for each of the 9 Bay Area counties.
 
-![County Daily, Recent](https://github.com/slwatkins/covid/blob/master/.travis/current_county_new_cases_month.png)
+![County Daily, Recent](https://github.com/slwatkins/covid/blob/master/.github/current_county_new_cases_month.png)

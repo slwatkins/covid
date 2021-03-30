@@ -19,9 +19,9 @@ jobs:
         pip install
         build
         --user
-    - name: Install numpy
+    - name: Install other dependencies
       run: >-
-        pip install numpy
+        pip install numpy wheel setuptools --user
     - name: Build a binary wheel and a source tarball
       run: >-
         python -m

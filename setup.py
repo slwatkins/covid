@@ -46,7 +46,7 @@ class CleanCommand(Command):
                 shutil.rmtree(path)
 
 setup(
-    name="covid-slwatkins",
+    name="covid",
     version="0.1.1",
     description="Bay Area COVID-19 Plotting Package",
     author="Samuel Watkins",

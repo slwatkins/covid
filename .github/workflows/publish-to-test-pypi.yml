@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
     - name: Set up Python 3.7
       uses: actions/setup-python@v2
       with:

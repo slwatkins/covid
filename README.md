@@ -1,5 +1,4 @@
 # Bay Area COVID-19 Dashboard
-[![Build Status](https://travis-ci.com/slwatkins/covid.svg?branch=master)](https://travis-ci.com/slwatkins/covid)
 
 A repo for plotting and analyzing COVID-19 cases/deaths, with a focus on the San Francisco Bay Area. The data in this `README` are from the [John Hopkins University dataset](https://github.com/CSSEGISandData/COVID-19).
 

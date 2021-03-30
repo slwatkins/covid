@@ -1,0 +1,57 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Remake plots for README
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  create-plots:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      # Runs a single command using the runners shell
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install .
+
+      - name: Update plots
+        run: |
+          python .github/update_plots.py
+
+      - name: Setup git
+        run: |
+          git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config --global user.name github-actions
+          git add .github/*.png
+
+      - name: Check if there are changes
+        id: changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
+
+      - name: Upload files
+        if: steps.changes.outputs.changed == 1
+        run: |
+          git commit --message 'Update plots'
+          git remote remove origin
+          git remote add origin https://${secrets.GITHUB_TOKEN}@github.com/slwatkins/covid.git
+          git push --quiet origin HEAD:master > /dev/null 2>&1

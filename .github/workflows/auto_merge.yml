@@ -11,24 +11,12 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   auto-merge:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies')
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    name: Auto merge dependabot PR
+    if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
     steps:
-      - uses: actions/checkout@v2
+      - name: Auto merge dependabot PR
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
         with:
-          submodules: 'recursive'
-
-      - name: Setup git
-        run: |
-          git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git config --global user.name github-actions
-
-      - name: Merge PR
-        run: |
-          git remote remove origin
-          git remote add origin https://${{ secrets.PA_TOKEN }}@github.com/slwatkins/covid.git
-          git merge $GITHUB_REF
-          git push origin master
+          target: minor
+          github-token: ${{ secrets.PA_TOKEN }}

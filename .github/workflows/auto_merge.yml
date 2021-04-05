@@ -16,7 +16,7 @@ jobs:
     if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
     steps:
       - name: Auto merge dependabot PR
-        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        uses: ahmadnassri/action-dependabot-auto-merge@v2.3
         with:
           target: minor
           github-token: ${{ secrets.PA_TOKEN }}

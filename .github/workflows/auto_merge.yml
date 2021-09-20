@@ -1,4 +1,4 @@
-name: Auto-Merge Pull Requests
+name: Automerge dependabot updates
 
 # Controls when the action will run. 
 on:
@@ -6,13 +6,23 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
-  merge-me:
-    name: Merge me!
+  dependabot-merge:
+    name: Merge dependabot updates
+    if: ${{ github.actor == 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Merge me!
-        uses: ridedott/merge-me-action@v2
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.1.1
         with:
-          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge Dependabot PR
+        run: gh pr merge --rebase "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

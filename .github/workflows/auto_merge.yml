@@ -15,4 +15,4 @@ jobs:
       - name: Merge me!
         uses: ridedott/merge-me-action@v2
         with:
-          github-token: ${{ secrets.PA_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PA_TOKEN }}

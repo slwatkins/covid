@@ -4,9 +4,10 @@ name: Remake plots for README
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow pull request events but only for the master branch
-  push:
-    branches: [ master ]
+  workflow_run:
+    workflows: ["Automerge dependabot updates"]
+    types: 
+      - completed
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 

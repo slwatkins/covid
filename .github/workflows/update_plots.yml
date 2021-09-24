@@ -6,6 +6,8 @@ name: Remake plots for README
 on:
   workflow_run:
     workflows: ["Automerge dependabot updates"]
+    branches:
+      - master
     types: 
       - completed
   # Allows you to run this workflow manually from the Actions tab

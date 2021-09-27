@@ -25,6 +25,7 @@ jobs:
         uses: nick-invision/retry@v2
         with:
           max_attempts: 3
+          timeout_minutes: 10
           retry_on: error
           command: gh pr merge --rebase "$PR_URL"
         env:

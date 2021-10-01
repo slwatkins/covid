@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import datetime
 import matplotlib.pyplot as plt
 import covid
 
@@ -13,8 +12,7 @@ fig, ax = covid.plot_bay_cases(
     data_source='jhu',
 )
 ax.set_title(
-    "Bay Area COVID-19 Stats\n"
-    f"Source: JHU, Last Updated: {datetime.date.today().strftime(format='%Y-%m-%d')}"
+    "Bay Area COVID-19 Stats, Source: JHU"
 )
 fig.savefig(".github/current_bay_area_total_cases.png", dpi=200, bbox_inches='tight')
 
@@ -27,8 +25,7 @@ fig, ax = covid.plot_bay_cases(
     data_source='jhu',
 )
 ax.set_title(
-    "Bay Area COVID-19 Stats\n"
-    f"Source: JHU, Last Updated: {datetime.date.today().strftime(format='%Y-%m-%d')}"
+    "Bay Area COVID-19 Stats, Source: JHU"
 )
 fig.savefig(".github/current_bay_area_new_cases.png", dpi=200, bbox_inches='tight')
 

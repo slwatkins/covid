@@ -1,6 +1,6 @@
 # Bay Area COVID-19 Dashboard
 
-![](https://github.com/slwatkins/covid/actions/workflows/update_plots.yml/badge.svg) ![](https://img.shields.io/badge/dynamic/yaml?color=informational&label=Plots%20Last%20Updated&query=date&url=https%3A%2F%2Fraw.githubusercontent.com%2Fslwatkins%2Fcovid%2Fmaster%2F.github%2Fdate_last_updated.yml)
+[![Automerge and Update Plots](https://github.com/slwatkins/covid/actions/workflows/auto_merge.yml/badge.svg)](https://github.com/slwatkins/covid/actions/workflows/auto_merge.yml) ![](https://img.shields.io/badge/dynamic/yaml?color=informational&label=Plots%20Last%20Updated&query=date&url=https%3A%2F%2Fraw.githubusercontent.com%2Fslwatkins%2Fcovid%2Fmaster%2F.github%2Fdate_last_updated.yml)
 
 A repo for plotting and analyzing COVID-19 cases/deaths, with a focus on the San Francisco Bay Area. The data in this `README` are from the [John Hopkins University dataset](https://github.com/CSSEGISandData/COVID-19).
 

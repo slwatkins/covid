@@ -37,7 +37,7 @@ jobs:
           echo "Updating plots on ${GITHUB_REF#refs/heads/}"
           python .github/update_plots.py
       - name: Update plots (PR)
-        if: github.event_name = 'pull_request_target'
+        if: github.event_name == 'pull_request_target'
         run: |
           echo "Updating plots on ${GITHUB_HEAD_REF#refs/heads/}"
           python .github/update_plots.py

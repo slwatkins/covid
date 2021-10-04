@@ -11,14 +11,49 @@ permissions:
   contents: write
 
 jobs:
-  hello-world:
-    name: Print PR name
+  create-plots:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Prints the current branch name
-      run: echo "$GITHUB_BRANCH"
-      env:
-        GITHUB_BRANCH: ${{ github.ref }}
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      # Runs a single command using the runners shell
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install .
+      - name: Update plots
+        run: |
+          echo "Updating plots on ${GITHUB_REF#refs/heads/}"
+          python .github/update_plots.py
+      - name: Setup git
+        run: |
+          git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config --global user.name github-actions
+          git add .github/*.png
+      - name: Check if there are changes
+        id: changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
+
+      - name: Upload files
+        if: steps.changes.outputs.changed == 1
+        run: |
+          python .github/update_date.py
+          git add .github/date_last_updated.yml
+          git commit --message 'Update plots'
+          git remote remove origin
+          git remote add origin https://${{ secrets.PA_TOKEN }}@github.com/slwatkins/covid.git
+          echo "Pushing to ${GITHUB_REF#refs/heads/}"
+          git push --quiet origin HEAD:"${GITHUB_REF#refs/heads/}" > /dev/null 2>&1
   dependabot-merge:
     name: Merge dependabot updates
     if: ${{ github.actor == 'dependabot[bot]' }}

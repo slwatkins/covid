@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Prints the current branch name
-      run: echo "${GITHUB_BRANCH##*/}"
+      run: echo "$GITHUB_BRANCH"
       env:
         GITHUB_BRANCH: ${{ github.head_ref }}
   dependabot-merge:

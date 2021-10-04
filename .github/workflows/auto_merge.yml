@@ -1,9 +1,9 @@
-name: Automerge dependabot updates
+name: Automerge and Update Plots
 
 # Controls when the action will run. 
 on:
   pull_request_target:
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows you to run this workflow manually from the Actions tab, only use for testing
   workflow_dispatch:
 
 permissions:
@@ -31,13 +31,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install .
-      - name: Update plots (non-PR)
-        if: github.event_name != 'pull_request_target'
-        run: |
-          echo "Updating plots on ${GITHUB_REF#refs/heads/}"
-          python .github/update_plots.py
-      - name: Update plots (PR)
-        if: github.event_name == 'pull_request_target'
+      - name: Update plots
         run: |
           echo "Updating plots on ${GITHUB_HEAD_REF#refs/heads/}"
           python .github/update_plots.py
@@ -58,8 +52,8 @@ jobs:
           git commit --message 'Update plots'
           git remote remove origin
           git remote add origin https://${{ secrets.PA_TOKEN }}@github.com/slwatkins/covid.git
-          echo "Pushing to ${GITHUB_REF#refs/heads/}"
-          git push --quiet origin HEAD:"${GITHUB_REF#refs/heads/}" > /dev/null 2>&1
+          echo "Pushing to ${GITHUB_HEAD_REF#refs/heads/}"
+          git push --quiet origin HEAD:"${GITHUB_HEAD_REF#refs/heads/}" > /dev/null 2>&1
   dependabot-merge:
     name: Merge dependabot updates
     needs: [create-plots]

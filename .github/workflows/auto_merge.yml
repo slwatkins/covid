@@ -56,6 +56,7 @@ jobs:
           git push --quiet origin HEAD:"${GITHUB_REF#refs/heads/}" > /dev/null 2>&1
   dependabot-merge:
     name: Merge dependabot updates
+    needs: [create-plots]
     if: ${{ github.actor == 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     steps:

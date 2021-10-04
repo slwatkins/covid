@@ -15,8 +15,11 @@ jobs:
     name: Print PR name
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
-        run: echo Hello world from $GITHUB_HEAD_REF!
+      - name: Print branch name
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+      # print branch name
+      - name: Get branch name
+        run: echo 'The branch name is' $BRANCH_NAME
   dependabot-merge:
     name: Merge dependabot updates
     if: ${{ github.actor == 'dependabot[bot]' }}

@@ -11,6 +11,12 @@ permissions:
   contents: write
 
 jobs:
+  hello-world:
+    name: Print PR name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello world
+        run: echo Hello world from $GITHUB_HEAD_REF!
   dependabot-merge:
     name: Merge dependabot updates
     if: ${{ github.actor == 'dependabot[bot]' }}

@@ -19,6 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           submodules: 'recursive'
 
       - name: Set up Python 3.7
@@ -53,7 +54,7 @@ jobs:
           git remote remove origin
           git remote add origin https://${{ secrets.PA_TOKEN }}@github.com/slwatkins/covid.git
           echo "Pushing to ${GITHUB_HEAD_REF#refs/heads/}"
-          git push --quiet origin HEAD:"${GITHUB_HEAD_REF#refs/heads/}" > /dev/null 2>&1
+          git push --quiet origin HEAD:${GITHUB_HEAD_REF#refs/heads/} > /dev/null 2>&1
   dependabot-merge:
     name: Merge dependabot updates
     needs: [create-plots]

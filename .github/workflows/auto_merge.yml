@@ -33,7 +33,7 @@ jobs:
           submodules: 'recursive'
       - id: get-dataset
         run: |
-          id=$(echo ${GITHUB_HEAD_REF#refs/heads/} | cut-d/ -f5 | cut -d- -f1)
+          id=$(echo ${GITHUB_HEAD_REF#refs/heads/} | cut -d/ -f5 | cut -d- -f1)
           echo "::set-output name=id::$id"
       - name: Set up Python
         if: ${{ steps.get-dataset.outputs.id == 'jhu'}}

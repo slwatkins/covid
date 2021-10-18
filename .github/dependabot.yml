@@ -3,20 +3,49 @@ updates:
 - package-ecosystem: gitsubmodule
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
+    day: sunday
     time: "07:00"
   open-pull-requests-limit: 10
 - package-ecosystem: gitsubmodule
   directory: "//"
   schedule:
     interval: weekly
-    day: saturday
+    day: monday
     time: "07:00"
   open-pull-requests-limit: 10
 - package-ecosystem: gitsubmodule
   directory: "///"
   schedule:
     interval: weekly
-    day: sunday
+    day: tuesday
+    time: "07:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: gitsubmodule
+  directory: "////"
+  schedule:
+    interval: weekly
+    day: wednesday
+    time: "07:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: gitsubmodule
+  directory: "/////"
+  schedule:
+    interval: weekly
+    day: thursday
+    time: "07:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: gitsubmodule
+  directory: "//////"
+  schedule:
+    interval: weekly
+    day: friday
+    time: "07:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: gitsubmodule
+  directory: "///////"
+  schedule:
+    interval: weekly
+    day: saturday
     time: "07:00"
   open-pull-requests-limit: 10

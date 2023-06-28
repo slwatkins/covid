@@ -2,6 +2,8 @@
 
 [![Automerge and Update Plots](https://github.com/slwatkins/covid/actions/workflows/auto_merge.yml/badge.svg)](https://github.com/slwatkins/covid/actions/workflows/auto_merge.yml) ![](https://img.shields.io/badge/dynamic/yaml?color=informational&label=Plots%20Last%20Updated&query=date&url=https%3A%2F%2Fraw.githubusercontent.com%2Fslwatkins%2Fcovid%2Fmaster%2F.github%2Fdate_last_updated.yml)
 
+**NOTE: this repository has been archived, as the datasets being used are no longer being updated as March 13, 2023.**
+
 A repo for plotting and analyzing COVID-19 cases/deaths, with a focus on the San Francisco Bay Area. The data in this `README` are from the [John Hopkins University dataset](https://github.com/CSSEGISandData/COVID-19).
 
 To install this package, clone this repo, from the top-level directory of the repo, type the following line into your command line
